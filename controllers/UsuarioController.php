@@ -7,6 +7,7 @@ use app\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
@@ -69,12 +70,12 @@ class UsuarioController extends Controller
     {
         $model = new Usuario();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $senhaDecript = $model->senha;
+            $senhaCript = sha1(md5($senhaDecript));
+            $model->senha = $senhaCript;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -111,6 +112,9 @@ class UsuarioController extends Controller
      */
     public function actionDelete($id)
     {
+
+        var_dump($id);
+        var_dump($this->findModel($id));die;
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

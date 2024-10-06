@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\UsuarioSearch $searchModel */
@@ -32,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nome',
             'email:email',
-            'senha',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Usuario $model, $key, $index, $column) {

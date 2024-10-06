@@ -33,7 +33,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -78,7 +78,9 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            $usuarioLogado = Usuario::usuarioLogado();
+            $session = Yii::$app->session;
+            return $this->goHome();
         } else {
             return $this->render('login', ['model' => $model]);
         }
@@ -124,18 +126,18 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function beforeAction($action)
-    {
-        // Se a ação atual é 'login', não redirecionar para login novamente.
-        if ($this->action->id == 'login') {
-            return parent::beforeAction($action);
-        }
+     public function beforeAction($action)
+     {
+        //  Se a ação atual é 'login', não redirecionar para login novamente.
+         if ($this->action->id == 'login') {
+             return parent::beforeAction($action);
+         }
 
-        // Se o usuário não está logado, redireciona para a página de login.
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['site/login']);
-        }
+        //  Se o usuário não está logado, redireciona para a página de login.
+         if (Yii::$app->user->isGuest) {
+             return $this->redirect(['site/login']);
+         }
 
-        return parent::beforeAction($action);
-    }
+         return parent::beforeAction($action);
+     }
 }

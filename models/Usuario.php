@@ -19,6 +19,7 @@ use Yii;
 class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     public $authKey;
+    public $nomeCurto;
     /**
      * {@inheritdoc}
      */
@@ -33,8 +34,8 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['nome', 'email', 'senha'], 'required'],
-            [['nome', 'email', 'senha'], 'string', 'max' => 300],
+            [['nome', 'username', 'email', 'senha'], 'required'],
+            [['nome', 'username', 'email', 'senha'], 'string', 'max' => 300],
         ];
     }
 
@@ -46,6 +47,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => 'ID',
             'nome' => 'Nome',
+            'username' => 'Usuário',
             'email' => 'Email',
             'senha' => 'Senha',
         ];
@@ -53,8 +55,13 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::findOne($id);
     }
+
+    // public static function findIdentity($id)
+    // {
+    //     return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+    // }
 
     // public static function findIdentityByAccessToken($token, $type = null)
     // {
@@ -88,7 +95,6 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
         if($user) {
             $auth = \Yii::$app->authManager;
-            $user['perfil'] = $auth->getRolesByUser(Yii::$app->user->id);
             $temp = explode(" ", $user['nome']);
             $user['nomeCurto'] = $temp[0] . " " . $temp[count($temp) - 1];
         }
@@ -98,7 +104,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function validateSenha($senha)
     {
-        return $this->senha === $senha;
+        return $this->senha === sha1(md5($senha));
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
@@ -108,7 +114,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findByUsername($login)
     {
-        $user = Usuario::find()->where(['email' => $login])->one();
+        $user = Usuario::find()->where(['username' => $login])->one();
 
         if($user)
         {

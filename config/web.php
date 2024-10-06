@@ -20,13 +20,18 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-        'identityClass' => 'app\models\Usuario',
-        'enableAutoLogin' => true,
-        'identityCookie' => [
-            'name' => '_identity',
-            'httpOnly' => true,
-            'expire' => time() + 3600 * 24 * 30, // Cookie expira em 30 dias
-            ],
+            'identityClass' => 'app\models\Usuario',
+            'enableAutoLogin' => false,
+            'enableSession' => true,
+            'authTimeout' => 14400,
+            'identityCookie' => [
+                'name' => '_defaultIdentity',
+            ]
+        ],
+        'session' => [
+            'class' => 'yii\web\CacheSession',
+            'timeout' => 14400,
+            'name' => '_defaultSessionId',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -54,13 +59,9 @@ $config = [
             'rules' => [
             ],
         ],
-        'session' => [
-            'class' => 'yii\web\CacheSession',
-            'timeout' => 14400,
-            'name' => '_defaultSessionId',
-        ],
     ],
     'params' => $params,
+    'defaultRoute' => 'site/estado',
 ];
 
 if (YII_ENV_DEV) {

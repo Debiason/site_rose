@@ -11,8 +11,7 @@ use app\models\Usuario;
  * @var $content string
  */
 // $this->registerAssetBundle('app');
-$usuarioLogado = Usuario::usuarioLogado();
-
+// Verifica se existe os dados da sessão de login
 ?>
 <?php $this->beginPage(); ?>
 
@@ -38,23 +37,44 @@ $usuarioLogado = Usuario::usuarioLogado();
 </head>
 <body class="post-template page-template page grey lighten-5">
   <?php $this->beginBody() ?>
-	<nav>
-		<div class="nav-wrapper cyan darken-3">
-	  		<?php
-						echo Menu::widget([
-						    'options' => ['id' => "nav-mobile", 'class' => 'left side-nav'],
-						    'items' => [
-						        ['label' => 'Home', 'url' => ['site/index']],
-						        ['label' => 'About', 'url' => ['site/about']],
-						        ['label' => 'Contact', 'url' => ['site/contact']],
-						        ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-						    ],
-						]);
-					?>
-			<a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
-			<div class="text-align-left"><span><?=$usuarioLogado->nome ?? '' ?></span></div>
-		</div>                         
-	</nav>
+  <?php
+// Obter o nome do usuário logado
+$username = !Yii::$app->user->isGuest ? Yii::$app->user->identity->nome : '';
+
+?>
+<nav>
+    <div class="nav-wrapper cyan darken-3">
+        <?php
+        // Definir os itens do menu
+        echo Menu::widget([
+            'options' => ['id' => "nav-mobile", 'class' => 'left side-nav'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/estado']],
+                ['label' => 'Contatos', 'url' => ['/contato']],
+                ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+            ],
+        ]);
+
+        // Adicionar o nome do usuário e o botão de logout no lado direito
+        if (!Yii::$app->user->isGuest) {
+            echo '<ul class="right">';
+            echo '<li><a href="#">' . Html::encode($username) . '</a></li>';
+            
+            // Corrigir o link de logout para usar POST
+            echo '<li>' . Html::a('Logout', ['site/logout'], [
+                'data-method' => 'post', // Garante que o logout seja feito com requisição POST
+                'data-confirm' => 'Você realmente deseja sair?' // (opcional) Adiciona uma confirmação antes de deslogar
+            ]) . '</li>';
+            
+            echo '</ul>';
+        }
+        ?>
+        <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+    </div>
+</nav>
+
+</nav>
+
 
 		
 
