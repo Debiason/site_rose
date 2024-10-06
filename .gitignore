@@ -33,4 +33,4 @@ tests/_support/_generated
 /.vagrant
 
 #bd
-/config/bd.php
+/config/db.php
