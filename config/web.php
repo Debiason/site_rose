@@ -61,7 +61,7 @@ $config = [
         ],
     ],
     'params' => $params,
-    'defaultRoute' => 'site/estado',
+    'defaultRoute' => 'estado',
 ];
 
 if (YII_ENV_DEV) {
