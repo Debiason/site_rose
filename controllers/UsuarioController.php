@@ -112,11 +112,7 @@ class UsuarioController extends Controller
      */
     public function actionDelete($id)
     {
-
-        var_dump($id);
-        var_dump($this->findModel($id));die;
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -134,5 +130,54 @@ class UsuarioController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionUploadFoto()
+    {
+
+        if (Yii::$app->request->isAjax
+            && Yii::$app->request->post()
+            && !Yii::$app->user->isGuest) {
+
+            $data = Yii::$app->request->post();
+            $data = $data['image'];
+
+            if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
+                $data = substr($data, strpos($data, ',') + 1);
+                $type = strtolower($type[1]); // jpg, png, gif
+
+                if (!in_array($type, ['jpg', 'jpeg', 'png'])) {
+                    return $this->asJson(['success' => false, 'msg' => 'Este tipo de extensão é inválido']);
+                }
+
+                $data = base64_decode($data);
+
+                if ($data === false) {
+                    return $this->asJson(['success' => false, 'msg' => 'Base64_decode falhou. ']);
+                }
+            } else {
+                return $this->asJson(['success' => false, 'msg' => 'Não corresponde ao URI de dados com dados de imagem.']);
+            }
+
+            $filePath = "../web/img/avatar/";
+            $file = Yii::$app->user->identity->id . "-usuario.jpg";
+
+            if ($type !== 'jpg') {
+                $source = imagecreatefromstring($data);
+                $rotate = imagerotate($source, 0, 0); // if want to rotate the image
+                $gerou = imagejpeg($rotate, $filePath . $file, 100);
+                imagedestroy($source);
+                if ($gerou) {
+                    return $this->asJson(['success' => true, 'msg' => 'Imagem gerada com sucesso.', 'src' => Yii::$app->params['urlPhotoUser'] . '/' . $file]);
+                } else {
+                    return $this->asJson(['success' => false, 'msg' => 'Não foi possível gerar a imagem.']);
+                }
+            } else {
+                file_put_contents($filePath . $file, $data);
+            }
+
+            return $this->asJson(['success' => true, 'msg' => 'Alterado com sucesso.', 'src' => Yii::$app->params['urlPhotoUser'] . '/' . $file]);
+        }
+        throw new \yii\web\NotFoundHttpException('Error');
     }
 }

@@ -6,15 +6,24 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'debug'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@photo' => '/img/avatar',
+    ],
+    'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            // você pode definir a lista de IPs permitidos para acessar o painel de debug
+            'allowedIPs' => ['127.0.0.1', '::1'], // permite apenas localhost
+        ],
     ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'zua3QAFyseHNkr7SRpy8w5OX9HOnt0Nh',
+            'enableCsrfValidation' => false,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

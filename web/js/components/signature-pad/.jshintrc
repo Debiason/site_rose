@@ -1,0 +1,20 @@
+{
+  "predef": [
+    "FlashCanvas"
+    , "typeIt"
+  ],
+    "esversion": 9
+  , "browser": true
+  , "jquery": true
+  , "asi": true
+  , "eqeqeq": true
+  , "eqnull": true
+  , "immed": true
+  , "newcap": true
+  , "laxbreak": true
+  , "laxcomma": true
+  , "noarg": true
+  , "onevar": true
+  , "undef": true
+  , "sub": true
+}

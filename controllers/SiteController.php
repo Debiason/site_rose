@@ -126,18 +126,5 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-     public function beforeAction($action)
-     {
-        //  Se a ação atual é 'login', não redirecionar para login novamente.
-         if ($this->action->id == 'login') {
-             return parent::beforeAction($action);
-         }
 
-        //  Se o usuário não está logado, redireciona para a página de login.
-         if (Yii::$app->user->isGuest) {
-             return $this->redirect(['site/login']);
-         }
-
-         return parent::beforeAction($action);
-     }
 }
