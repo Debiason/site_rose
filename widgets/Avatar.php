@@ -26,7 +26,8 @@ class Avatar extends Widget
         $linkImagem =  $this->getPhoto((int)$this->id, (string)$this->nome);
         $cache = strpos($linkImagem, 'https') === false ? filemtime( \Yii::getAlias('@webroot') . $linkImagem) : 1;
 
-        $out = "<img src='". $linkImagem. "?v={$cache}'";
+        $out = "<img src='http://localhost/site_rose/web/". $linkImagem. "?v={$cache}'";
+        // $out = "<img src='http://localhost/site_rose/web/img/avatar/4-usuario.jpg?v={$cache}'";
         if(!empty($this->options) && is_array($this->options)) {
             foreach ($this->options as $key => $value) {
                 if(!is_numeric($key)){

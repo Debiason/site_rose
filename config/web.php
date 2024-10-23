@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    'name' => 'Site Rose',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'debug'],
@@ -11,6 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@photo' => '/img/avatar',
+        '@web' => '/site_rose/web/', 
     ],
     'modules' => [
         'debug' => [
@@ -24,6 +26,7 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'zua3QAFyseHNkr7SRpy8w5OX9HOnt0Nh',
             'enableCsrfValidation' => false,
+            'baseUrl' => '/site_rose/web/'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

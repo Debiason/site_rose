@@ -3,6 +3,8 @@ $.urlParam = function (name) {
     if (results == null) {
         return null;
     }
+    console.log('name');
+    console.log(name);
     return decodeURI(results[1]) || 0;
 };
 
@@ -590,26 +592,26 @@ $(document).on('select2:open', () => {
     document.querySelector('.select2-search__field').focus();
 });
 
-var fldcheckbox = $("#pagamentonotafiscal-boleto , #pagamentointerno-boleto");
-fldcheckbox.on('click', function () {
-    var model = $('#modelId');
-    if (!($(this).is(':checked')) && model.val()) {
-        $.ajax({
-            url: '/pedido/verifica-boleto-pedido/',
-            data: {
-                id: model.val()
-            },
-            async: false,
-            success: function (resp) {
-                if (!resp){
-                    fldcheckbox.prop('checked', true);
-                    $('#contaBancaria').addClass('d-none')
-                    toastr.warning('Para desmarcar a opção, o boleto precisa ser excluído.');
-                }
-            }
-        });
-    }
-});
+// var fldcheckbox = $("#pagamentonotafiscal-boleto , #pagamentointerno-boleto");
+// fldcheckbox.on('click', function () {
+//     var model = $('#modelId');
+//     if (!($(this).is(':checked')) && model.val()) {
+//         $.ajax({
+//             url: '/pedido/verifica-boleto-pedido/',
+//             data: {
+//                 id: model.val()
+//             },
+//             async: false,
+//             success: function (resp) {
+//                 if (!resp){
+//                     fldcheckbox.prop('checked', true);
+//                     $('#contaBancaria').addClass('d-none')
+//                     toastr.warning('Para desmarcar a opção, o boleto precisa ser excluído.');
+//                 }
+//             }
+//         });
+//     }
+// });
 
 // /* TODO Insights IA */
 // /* Funcionalidade em fase BETA */
