@@ -12,7 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@photo' => '/img/avatar',
-        '@web' => '/site_rose/web/', 
+        '@web' => '/site_rose/web', 
     ],
     'modules' => [
         'debug' => [
@@ -26,7 +26,7 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'zua3QAFyseHNkr7SRpy8w5OX9HOnt0Nh',
             'enableCsrfValidation' => false,
-            'baseUrl' => '/site_rose/web/'
+            'baseUrl' => '/site_rose/web'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -73,7 +73,7 @@ $config = [
         ],
     ],
     'params' => $params,
-    'defaultRoute' => 'estado',
+    // 'defaultRoute' => 'estado',
 ];
 
 if (YII_ENV_DEV) {

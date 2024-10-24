@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Novo Contato', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -32,8 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'telefone',
             'email:email',
             'endereco',
-            //'cep',
-            //'id_estado',
+            'dt_contato',
+            'contato_realizado',
+            'obs',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Contato $model, $key, $index, $column) {

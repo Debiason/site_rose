@@ -14,6 +14,9 @@ use Yii;
  * @property string|null $endereco
  * @property string|null $cep
  * @property int|null $id_estado
+ * @property int|null $dt_contato
+ * @property int|null $contato_realizado
+ * @property int|null $obs
  *
  * @property Estado $estado
  */
@@ -37,8 +40,9 @@ class Contato extends \yii\db\ActiveRecord
             [['id_estado'], 'integer'],
             [['cidade', 'email'], 'string', 'max' => 100],
             [['telefone'], 'string', 'max' => 20],
-            [['endereco'], 'string', 'max' => 255],
+            [['endereco', 'obs'], 'string', 'max' => 255],
             [['cep'], 'string', 'max' => 10],
+            [['dt_contato', 'contato_realizado'], 'safe'],
             [['id_estado'], 'exist', 'skipOnError' => true, 'targetClass' => Estado::class, 'targetAttribute' => ['id_estado' => 'id']],
         ];
     }
@@ -56,6 +60,9 @@ class Contato extends \yii\db\ActiveRecord
             'endereco' => 'Endereco',
             'cep' => 'Cep',
             'id_estado' => 'Id Estado',
+            'dt_contato' => 'Data',
+            'contato_realizado' => 'Contato',
+            'obs' => 'Observação',
         ];
     }
 

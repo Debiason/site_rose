@@ -18,7 +18,7 @@ class ContatoSearch extends Contato
     {
         return [
             [['id', 'id_estado'], 'integer'],
-            [['cidade', 'telefone', 'email', 'endereco', 'cep'], 'safe'],
+            [['cidade', 'telefone', 'email', 'endereco', 'cep', 'dt_contato', 'contato_realizado', 'obs'], 'safe'],
         ];
     }
 
@@ -66,7 +66,10 @@ class ContatoSearch extends Contato
             ->andFilterWhere(['like', 'telefone', $this->telefone])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'endereco', $this->endereco])
-            ->andFilterWhere(['like', 'cep', $this->cep]);
+            ->andFilterWhere(['like', 'cep', $this->cep])
+            ->andFilterWhere(['like', 'cep', $this->dt_contato])
+            ->andFilterWhere(['like', 'cep', $this->contato_realizado])
+            ->andFilterWhere(['like', 'cep', $this->obs]);
 
         return $dataProvider;
     }

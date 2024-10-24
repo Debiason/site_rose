@@ -8,6 +8,14 @@ main > .container {
     object-fit: cover; /* Mantém a proporção da imagem */
 }
 
+/* body {
+    color: #121225 !important;
+}
+
+h1, h2, h3, p, a {
+    color: #1b1b31 !important;
+} */
+
 
 .footer {
     background-color: #f5f5f5;

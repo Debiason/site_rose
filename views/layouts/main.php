@@ -49,7 +49,7 @@ $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\Bootst
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
-    <script>
+    <!-- <script>
     WebFont.load({
         google: {
             "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
@@ -58,7 +58,7 @@ $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\Bootst
             sessionStorage.fonts = true;
         }
     });
-    </script>
+    </script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="shortcut icon" href="../img/logo2.png" />
 
@@ -85,7 +85,8 @@ $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\Bootst
 			echo Menu::widget([
 				'options' => ['id' => "nav-mobile", 'class' => 'left side-nav'],
 				'items' => [
-					['label' => 'Home', 'url' => ['/estado']],
+					['label' => 'Home', 'url' => ['/']],
+					['label' => 'Estados', 'url' => ['/estado']],
 					['label' => 'Contatos', 'url' => ['/contato']],
 					['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 				],

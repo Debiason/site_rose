@@ -25,6 +25,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'cep')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'obs')->textInput(['maxlength' => true]) ?>
+
     <?php
     $dataPedido = Estado::find()
         ->select(['id', 'nome_estado as nome'])
