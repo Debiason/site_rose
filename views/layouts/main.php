@@ -18,8 +18,6 @@ AppAsset::register($this);
 
 $usuarioLogado = \app\models\Usuario::usuarioLogado();
 
-$this->registerCssFile("@web/js/components/croppiejs/croppie.min.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
-$this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 
 /**
  * @var $this \yii\base\View
@@ -50,24 +48,26 @@ $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\Bootst
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
     <!-- <script>
-    WebFont.load({
-        google: {
-            "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
-        },
-        active: function() {
-            sessionStorage.fonts = true;
-        }
-    });
-    </script> -->
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+                },
+                active: function() {
+                    sessionStorage.fonts = true;
+                    }
+                    });
+                </script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="shortcut icon" href="../img/logo2.png" />
+    <link rel="shortcut icon" href="../web/img/logo2.png" />
 
     <?php
 	$this->registerCssFile("@web/assets/font/font-awesome/css/font-awesome.min.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 	$this->registerCssFile("@web/assets/css/materialize.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 	$this->registerCssFile("@web/assets/css/prism.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 	$this->registerJsFile('@web/js/components/croppiejs/croppie.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+	$this->registerJsFile('@web/assets/js/materialize.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 	$this->registerCssFile("@web/js/components/croppiejs/croppie.min.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
+    $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\BootstrapAsset::className()]]);
 	?>
 
 </head>
@@ -172,10 +172,10 @@ $this->registerCssFile("@web/css/site.css", ['depends' => [\yii\bootstrap\Bootst
                     </div>
                 </div>
             </div>
-        </div>
-        <?php } ?>
+            <?php } ?>
 
-        <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+
         </div>
     </nav>
 
